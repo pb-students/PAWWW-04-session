@@ -1,4 +1,4 @@
-package net.wvffle.servlet.java01.servlets;
+package net.wvffle.servlet.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "a", value = "/endpoint/a")
-public class EndpointAServlet extends HttpServlet {
+@WebServlet(name = "b", value = "/endpoint/b")
+public class EndpointBServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        writer.write('A');
+        writer.write('B');
     }
 }

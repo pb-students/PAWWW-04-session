@@ -1,4 +1,4 @@
-package net.wvffle.servlet.java01.filters;
+package net.wvffle.servlet.filters;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;

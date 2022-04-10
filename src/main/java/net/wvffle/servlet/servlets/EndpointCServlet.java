@@ -1,4 +1,4 @@
-package net.wvffle.servlet.java01.servlets;
+package net.wvffle.servlet.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

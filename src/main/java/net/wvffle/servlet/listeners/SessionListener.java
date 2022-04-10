@@ -1,4 +1,4 @@
-package net.wvffle.servlet.java01.listeners;
+package net.wvffle.servlet.listeners;
 
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionEvent;
