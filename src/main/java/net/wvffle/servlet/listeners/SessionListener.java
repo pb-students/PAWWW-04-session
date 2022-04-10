@@ -11,5 +11,6 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         se.getSession().setAttribute("endpointEntranceCounter", new HashMap<String, Integer>());
+        se.getSession().setAttribute("logged-in", false);
     }
 }
