@@ -29,5 +29,13 @@
         <a href="/endpoint/a">Endpoint A</a>
         <a href="/endpoint/b">Endpoint B</a>
         <a href="/endpoint/c">Endpoint C</a>
+
+        <% boolean rememberMe = (boolean) session.getAttribute("remember-me"); %>
+        <% boolean loggedIn = (boolean) session.getAttribute("logged-in"); %>
+        <% if (loggedIn && rememberMe) { %>
+        <form method="post" action="/logout">
+            <input type="submit" value="logout" />
+        </form>
+        <% } %>
     </body>
 </html>

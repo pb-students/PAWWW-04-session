@@ -12,5 +12,6 @@ public class SessionListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent se) {
         se.getSession().setAttribute("endpointEntranceCounter", new HashMap<String, Integer>());
         se.getSession().setAttribute("logged-in", false);
+        se.getSession().setAttribute("remember-me", false);
     }
 }
