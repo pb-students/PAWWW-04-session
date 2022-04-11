@@ -16,7 +16,7 @@ public class RequestListener implements ServletRequestListener {
             boolean loggedIn = (boolean) httpRequest.getSession().getAttribute("logged-in");
             boolean rememberMe = (boolean) httpRequest.getSession().getAttribute("remember-me");
 
-            if (loggedIn && !rememberMe) {
+            if (loggedIn && !rememberMe && !httpRequest.getRequestURL().toString().endsWith("/login")) {
                 httpRequest.getSession().setAttribute("logged-in", false);
             }
         }
