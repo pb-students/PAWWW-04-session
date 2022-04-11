@@ -1,8 +1,5 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Comparator" %>
 <%@ page import="java.util.stream.Collectors" %>
-<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -30,9 +27,16 @@
         <a href="/endpoint/b">Endpoint B</a>
         <a href="/endpoint/c">Endpoint C</a>
 
-        <% boolean rememberMe = (boolean) session.getAttribute("remember-me"); %>
-        <% boolean loggedIn = (boolean) session.getAttribute("logged-in"); %>
-        <% if (loggedIn && rememberMe) { %>
+        <%
+            boolean loggedIn = false;
+            Set<UUID> tokens = (Set<UUID>) request.getServletContext().getAttribute("tokens");
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("token")) {
+                    loggedIn = tokens.contains(UUID.fromString(cookie.getValue()));
+                }
+            }
+        %>
+        <% if (loggedIn) { %>
         <form method="post" action="/logout">
             <input type="submit" value="logout" />
         </form>

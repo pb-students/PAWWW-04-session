@@ -2,13 +2,13 @@ package net.wvffle.servlet.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -29,10 +29,14 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         boolean rememberMe = Objects.equals(req.getParameter("rememberMe"), "on");
 
+        Set<UUID> tokens = (Set<UUID>) req.getServletContext().getAttribute("tokens");
         Map<String, String> admins = (Map<String, String>) getServletContext().getAttribute("admins");
         if (admins.containsKey(username) && Objects.equals(admins.get(username), password)) {
-            req.getSession().setAttribute("logged-in", true);
-            req.getSession().setAttribute("remember-me", rememberMe);
+            UUID token = UUID.randomUUID();
+            tokens.add(token);
+            Cookie tokenCookie = new Cookie("token", token.toString());
+            tokenCookie.setMaxAge(rememberMe ? 3600 * 365 : -1);
+            resp.addCookie(tokenCookie);
             resp.sendRedirect("/");
             return;
         }
